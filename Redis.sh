@@ -4,7 +4,7 @@
 dnf module disable redis -y
 dnf module enable redis:7 -y
 
-sed '/^bind/ s/127.0.0.1/0.0.0.0' /etc/redis/redis.conf
+sed -i '/^bind/ s/127.0.0.1/0.0.0.0' /etc/redis/redis.conf
 
 #Install Redis
 dnf install redis -y
