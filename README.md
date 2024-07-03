@@ -1,8 +1,11 @@
 We are going to learn Bash
 
 #List of Shell Topics
-printing
-variables
-conditions
-functions
-loops
+
+#.sh suffix to file
+
+1-printing
+2-variables
+3-conditions
+4-functions
+5-loops
