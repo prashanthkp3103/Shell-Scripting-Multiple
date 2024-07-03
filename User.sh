@@ -10,7 +10,7 @@ dnf install nodejs -y
 #useradd roboshop
 
 #Lets setup an app directory.
-mkdir /app
+#mkdir /app
 
 #Download the application code to created app directory
 curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip

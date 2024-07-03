@@ -18,4 +18,4 @@ dnf install redis -y
 
  #Start & Enable Redis Service
  systemctl enable redis
- systemctl start redis
+ systemctl restart redis
