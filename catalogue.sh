@@ -1,6 +1,9 @@
 #Setup SystemD Catalogue Service
 cp catalogue.service /etc/systemd/system/catalogue.service
 
+#mongo client install
+cp mongo.repo /etc/yum.repos.d/mongo.repo
+
 #Install NodeJS, By default NodeJS 16 is available, We would like to enable 20 version and install list.
 
 dnf module disable nodejs -y
@@ -31,8 +34,8 @@ systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
 
-#mongo client install
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+
+
 
 dnf install mongodb-mongosh -y
 
