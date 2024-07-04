@@ -11,7 +11,7 @@ dnf module enable nodejs:20 -y
 #Install NodeJS
 dnf install nodejs -y
 #Add application User
-#useradd roboshop
+useradd roboshop
 
 #Lets setup an app directory.
 mkdir /app
