@@ -1,3 +1,7 @@
+#Setup SystemD Catalogue Service
+cp user.service /etc/systemd/system/user.service
+
+
 #User is a microservice that is responsible for User Logins and Registrations Service in RobotShop e-commerce portal.
 #Install NodeJS, By default NodeJS 16 is available, We would like to enable 20 version and install list.
 #You can list modules by using dnf module list
@@ -30,4 +34,4 @@ systemctl daemon-reload
 
 #Start the service
 systemctl enable user
-systemctl start user
+systemctl restart user
