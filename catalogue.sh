@@ -32,7 +32,7 @@ systemctl enable catalogue
 systemctl start catalogue
 
 #mongo client install
-cp mongod.repo /etc/yum.repos.d/mongo.repo
+cp mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-mongosh -y
 
