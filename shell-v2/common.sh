@@ -35,12 +35,13 @@ NODEJS() {
   #Add application User
   useradd roboshop &>>$LOG_FILE
 
+  PRINT Cleaning the old content
+  rm -rf /app &>>$LOG_FILE
+
   PRINT Create App directory
   #Lets setup an app directory
   mkdir /app &>>$LOG_FILE
 
-  PRINT Cleaning the old content
-  rm -rf /app &>>$LOG_FILE
 
   PRINT Download App code
   #Download the application code to created app directory
