@@ -58,3 +58,10 @@ echo argument count - $#
 echo environment variable z = $z
 
 
+#variable cases styles
+#camel case
+#snake case (_)
+#Pascalcase (DevOps)
+#Unix ( Linux) - COURSE_NAME
+
+
