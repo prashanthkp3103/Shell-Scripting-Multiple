@@ -78,7 +78,14 @@ NODEJS() {
 
   PRINT Adding Application Roboshop user
   #Add application User
-  useradd roboshop &>>$LOG_FILE
+  #useradd roboshop &>>$LOG_FILE
+
+  #checking user exist or no based on that creating
+  id roboshop &>>$LOG_FILE
+  if [ $? -ne 0 ]; then
+   useradd roboshop &>>$LOG_FILE
+  fi
+
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
