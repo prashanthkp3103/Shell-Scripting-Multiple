@@ -10,7 +10,8 @@ dnf install mongodb-mongosh -y &>>$LOG_FILE
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo -e "\e[31mFAILURE\e[0m"
+  echo -e "\e[31mFAILURE---Exiting\e[0m"
+  exit
 fi
 
 
@@ -21,7 +22,7 @@ mongosh --host mongodb.dev.meppk.xyz </app/db/master-data.js &>>$LOG_FILE
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo -e "\e[31mFAILURE\e[0m"
+  echo -e "\e[31mFAILURE---Exiting\e[0m"
+  exit
 fi
-
 
