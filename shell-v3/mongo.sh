@@ -2,7 +2,7 @@ cp mongo.repo /etc/yum.repos.d/mongo.repo
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo -e "\e[31mFAILURE---Exiting\e[0m"
+  echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
   exit
 fi
 
@@ -11,7 +11,7 @@ dnf install mongodb-org -y
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo -e "\e[31mFAILURE---Exiting\e[0m"
+  echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
   exit
 fi
 
@@ -21,7 +21,7 @@ sed -i '/^bindIp/ s/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo -e "\e[31mFAILURE---Exiting\e[0m"
+  echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
   exit
 fi
 
@@ -31,7 +31,7 @@ systemctl start mongod
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo -e "\e[31mFAILURE---Exiting\e[0m"
+  echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
   exit
 fi
 
@@ -40,7 +40,7 @@ systemctl restart mongod
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo -e "\e[31mFAILURE---Exiting\e[0m"
+  echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
   exit
 fi
 

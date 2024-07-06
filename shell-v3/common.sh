@@ -27,7 +27,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -37,7 +37,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -48,7 +48,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -59,7 +59,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -70,7 +70,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -82,7 +82,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -92,7 +92,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -103,7 +103,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -115,7 +115,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -123,7 +123,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -132,7 +132,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -144,7 +144,7 @@ NODEJS() {
    if [ $? -eq 0 ]; then
      echo -e "\e[32mSUCCESS\e[0m"
    else
-     echo -e "\e[31mFAILURE---Exiting\e[0m"
+     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
      exit
    fi
 
@@ -154,7 +154,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
@@ -166,7 +166,7 @@ NODEJS() {
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFAILURE---Exiting\e[0m"
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
     exit
   fi
 
