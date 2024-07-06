@@ -1,31 +1,48 @@
-cp shipping.service /etc/systemd/system/shipping.service
+source common.sh
+component=shipping
+MAVEN
 
-dnf install maven -y
+echo installing MYSQL client
+dnf install mysql -y &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi
 
-useradd roboshop
-
-mkdir /app
-
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-cd /app
-unzip /tmp/shipping.zip
-
-cd /app
-mvn clean package
-mv target/shipping-1.0.jar shipping.jar
-
-systemctl daemon-reload
-
-systemctl enable shipping
-systemctl start shipping
-
-dnf install mysql -y
-
+echo Loading schema.sql file
 mysql -h mysql.dev.meppk.xyz -uroot -pRoboShop@1 < /app/db/schema.sql
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi
 
+echo Loading masterdata.sql file
 mysql -h mysql.dev.meppk.xyz -uroot -pRoboShop@1 < /app/db/master-data.sql
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi
 
+echo Loading appuser.sql file
 mysql -h mysql.dev.meppk.xyz -uroot -pRoboShop@1 < /app/db/app-user.sql
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi
 
-systemctl restart shipping
-
+echo restarting ${component}
+systemctl restart ${component}
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi

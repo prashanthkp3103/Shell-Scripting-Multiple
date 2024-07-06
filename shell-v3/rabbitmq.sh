@@ -1,13 +1,39 @@
-cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+source common.sh
+component=rabbimq
+LOG_FILE=/tmp/roboshop.log
 
-dnf install rabbitmq-server -y
+PRINT Coping the RabbitMQ Repo file
+cp rabbitmq.repo /etc/yum.repos.d/${rabbimq}.repo  &>>$LOG_FILE
 
-systemctl enable rabbitmq-server
-systemctl start rabbitmq-server
+PRINT Installing Rabbitmq
+dnf install rabbitmq-server -y  &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi
+
+PRINT Starting Rabbitmq
+systemctl enable rabbitmq-server &>>$LOG_FILE
+systemctl start rabbitmq-server  &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi
 
 #RabbitMQ comes with a default username / password as guest/guest.
 #But this user cannot be used to connect.
 #Hence we need to create one user for the application.
 
-rabbitmqctl add_user roboshop roboshop123
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+PRINT Setting Rabbitmq permissions
+rabbitmqctl add_user roboshop roboshop123  &>>$LOG_FILE
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"  &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi

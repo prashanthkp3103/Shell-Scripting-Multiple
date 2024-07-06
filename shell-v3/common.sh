@@ -178,3 +178,323 @@ NODEJS() {
   fi
 
 }
+
+MAVEN() {
+  PRINT Coping ${component} service file
+  cp ${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+    exit 1
+  fi
+
+  PRINT Installing Maven
+  dnf install maven -y &>>$LOG_FILE
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+    exit 1
+  fi
+
+  #checking user exist or no based on that creating
+    id roboshop &>>$LOG_FILE
+    if [ $? -ne 0 ]; then
+     useradd roboshop &>>$LOG_FILE
+    fi
+
+    if [ $? -eq 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+      exit 1
+    fi
+
+
+    PRINT Cleaning the old content
+    rm -rf /app &>>$LOG_FILE
+    if [ $? -eq 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+      exit 1
+    fi
+
+
+    PRINT Create App directory
+    #Lets setup an app directory
+    mkdir /app &>>$LOG_FILE
+    if [ $? -eq 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+      exit 1
+    fi
+
+    PRINT Download App code
+      #Download the application code to created app directory
+      curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      cd /app &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      PRINT extract App code content
+      unzip /tmp/${component}.zip &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+
+      #Lets download the dependencies
+      cd /app
+      PRINT Downloading App dependencies
+      mvn clean package &>>$LOG_FILE
+      mv target/${component}-1.0.jar ${component}.jar &>>$LOG_FILE
+       if [ $? -eq 0 ]; then
+         echo -e "\e[32mSUCCESS\e[0m"
+       else
+         echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+         exit 1
+       fi
+
+      PRINT loading the service
+      #Load the service
+      systemctl daemon-reload &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+
+      PRINT Starting the ${component} service
+      #Start the service
+      systemctl enable ${component} &>>$LOG_FILE
+      systemctl start ${component} &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+
+
+}
+
+PYTHON() {
+  PRINT Copying the ${component} service file
+  cp ${component}.service /etc/systemd/system/${component}.service  &>>$LOG_FILE
+
+  PRINT Installing python
+  dnf install python3 gcc python3-devel -y  &>>$LOG_FILE
+
+  PRINT Creating Roboshop user
+  #checking user exist or no based on that creating
+  id roboshop &>>$LOG_FILE
+  if [ $? -ne 0 ]; then
+    useradd roboshop &>>$LOG_FILE
+  fi
+
+
+   PRINT Cleaning the old content
+      rm -rf /app &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+
+      PRINT Create App directory
+      #Lets setup an app directory
+      mkdir /app &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      PRINT Download App code
+        #Download the application code to created app directory
+      curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      cd /app &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      PRINT extract App code content
+      unzip /tmp/${component}.zip &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      #Lets download the dependencies
+            cd /app
+            PRINT Downloading App dependencies
+            pip3 install -r requirements.txt &>>$LOG_FILE
+            if [ $? -eq 0 ]; then
+              echo -e "\e[32mSUCCESS\e[0m"
+            else
+              echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+              exit 1
+            fi
+
+            PRINT loading the service
+            #Load the service
+            systemctl daemon-reload &>>$LOG_FILE
+            if [ $? -eq 0 ]; then
+              echo -e "\e[32mSUCCESS\e[0m"
+            else
+              echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+              exit 1
+            fi
+
+
+            PRINT Starting the ${component} service
+            #Start the service
+            systemctl enable ${component} &>>$LOG_FILE
+            systemctl start ${component} &>>$LOG_FILE
+            if [ $? -eq 0 ]; then
+              echo -e "\e[32mSUCCESS\e[0m"
+            else
+              echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+              exit 1
+            fi
+
+
+
+}
+
+GO() {
+  PRINT Copying the ${component} service file
+  cp ${component}.service /etc/systemd/system/${component}.service  &>>$LOG_FILE
+
+  PRINT Installing golang
+  dnf install golang -y  &>>$LOG_FILE
+
+  PRINT Creating Roboshop user
+  #checking user exist or no based on that creating
+  id roboshop &>>$LOG_FILE
+  if [ $? -ne 0 ]; then
+    useradd roboshop &>>$LOG_FILE
+  fi
+
+
+      PRINT Cleaning the old content
+      rm -rf /app &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+
+      PRINT Create App directory
+      #Lets setup an app directory
+      mkdir /app &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      PRINT Download App code
+        #Download the application code to created app directory
+      curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      cd /app &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      PRINT extract App code content
+      unzip /tmp/${component}.zip &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+      #Lets download the dependencies
+      cd /app
+      PRINT Downloading App dependencies
+      go mod init dispatch  &>>$LOG_FILE
+      go get  &>>$LOG_FILE
+      go build  &>>$LOG_FILE
+      if [ $? -eq 0 ]; then
+        echo -e "\e[32mSUCCESS\e[0m"
+      else
+        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+        exit 1
+      fi
+
+       PRINT loading the service
+       #Load the service
+       systemctl daemon-reload &>>$LOG_FILE
+       if [ $? -eq 0 ]; then
+         echo -e "\e[32mSUCCESS\e[0m"
+       else
+         echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+         exit 1
+       fi
+
+
+        PRINT Starting the ${component} service
+        #Start the service
+        systemctl enable ${component} &>>$LOG_FILE
+        systemctl start ${component} &>>$LOG_FILE
+        if [ $? -eq 0 ]; then
+          echo -e "\e[32mSUCCESS\e[0m"
+        else
+          echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+          exit 1
+        fi
+
+
+
+}
+
