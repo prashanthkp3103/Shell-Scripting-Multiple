@@ -1,0 +1,50 @@
+cd /tmp
+ll
+cp /etc/passwd .
+clear
+ls -lrt
+sed '1 d
+cat passwd
+sed '1 d' passwed
+sed '1 d' passwd
+sed -i '1 d' passwd
+sed -i '/nologin/ d' passwd
+cat passswd
+ls -lrt
+cat passwd
+
+#Insert a line or adding a line
+sed '1 i Hello World' passwd
+
+#whereever u found bash insert hello world
+#add
+sed '/bash/ a Hello world' passwd
+
+#change
+sed '/bash/ c Hello world' passwd
+
+#search a word and replace/substitute
+sed 's/halt/poweroff/' passwd
+sed 's/halt/poweroff/g' passwd
+sed 'roboshop/ s/bash/ksh/' passwd
+
+sed 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+
+#line starts with bind there replace from 127.0.0.1 to 0.0.0.0
+sudo cat /etc/redis/redis.conf | grep 127.0.0.1 | sed '/^bind/ s/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
+
+sudo cat /etc/redis/redis.conf | grep protected-mode
+
+sudo sed '/protected-mode/ c protected-mode no/' /etc/redis/redis.conf
+or
+sudo sed 's/protected-mode yes/protected-mode no/' /etc/redis/redis.conf
+
+sudo cat /etc/redis/redis.conf | grep protected-mode | sed 's/protected-mode yes/protected-mode no/'
+
+sed -i '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
+
+
+
+
+
+

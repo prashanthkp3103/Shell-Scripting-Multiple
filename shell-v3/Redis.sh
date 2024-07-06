@@ -1,0 +1,23 @@
+#Redis is used for in-memory data storage(Caching) and allows users to access the data of database over API.
+#Install redis, By default redis *** is available, We would like to enable 7 version and install list.
+
+dnf module disable redis -y
+dnf module enable redis:7 -y
+
+#Install Redis
+dnf install redis -y
+
+sed -i '/^bind/ s/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
+sed -i '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
+
+
+
+#Usually Redis opens the port only to localhost(127.0.0.1), meaning this service can be accessed by the application that is hosted on this server only. However, we need to access this service to be accessed by another server, So we need to change the config accordingly.
+ #
+ #Update listen address from 127.0.0.1 to 0.0.0.0 in /etc/redis/redis.conf
+ #
+ #Update protected-mode from yes to no in /etc/redis/redis.conf
+
+ #Start & Enable Redis Service
+ systemctl enable redis
+ systemctl restart redis
