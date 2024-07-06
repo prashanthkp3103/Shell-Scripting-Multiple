@@ -3,7 +3,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-  exit
+  exit 1
 fi
 
 #Install MongoDB
@@ -12,7 +12,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-  exit
+  exit 1
 fi
 
 #sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
@@ -22,7 +22,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-  exit
+  exit 1
 fi
 
 #Start & Enable MongoDB Service
@@ -32,7 +32,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-  exit
+  exit 1
 fi
 
 #Restart the service to make the changes effected.
@@ -41,6 +41,6 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-  exit
+  exit 1
 fi
 

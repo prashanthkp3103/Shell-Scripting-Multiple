@@ -28,7 +28,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -38,7 +38,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -49,7 +49,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -60,7 +60,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -71,7 +71,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -83,7 +83,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -93,7 +93,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -104,7 +104,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -116,7 +116,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
   cd /app &>>$LOG_FILE
@@ -124,7 +124,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
   PRINT extract App code content
@@ -133,7 +133,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -145,7 +145,7 @@ NODEJS() {
      echo -e "\e[32mSUCCESS\e[0m"
    else
      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-     exit
+     exit 1
    fi
 
   PRINT loading the service
@@ -155,7 +155,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 
@@ -167,7 +167,7 @@ NODEJS() {
     echo -e "\e[32mSUCCESS\e[0m"
   else
     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-    exit
+    exit 1
   fi
 
 }
