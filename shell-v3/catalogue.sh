@@ -8,9 +8,9 @@ NODEJS
 echo installing mongodb client
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 if [ $? -eq 0 ]; then
-  echo SUCCESS
+  echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo FAILURE
+  echo -e "\e[31mFAILURE\e[0m"
 fi
 
 
@@ -19,9 +19,9 @@ echo loading catalogue db master data
 mongosh --host mongodb.dev.meppk.xyz </app/db/master-data.js &>>$LOG_FILE
 
 if [ $? -eq 0 ]; then
-  echo SUCCESS
+  echo -e "\e[32mSUCCESS\e[0m"
 else
-  echo FAILURE
+  echo -e "\e[31mFAILURE\e[0m"
 fi
 
 

@@ -8,25 +8,35 @@ PRINT () {
   echo $*
 
   }
+#STAT () {
+#   if [ $? -eq 0 ]; then
+#      echo SUCCESS
+#    else
+#      echo FAILURE
+#    fi
+#
+#}
+#access function with variable $? will be special variable
 
+#STAT $?
 NODEJS() {
   #You can list modules by using dnf module list
   #PRINT is a function
   PRINT Disbale Nodejs default Version
   dnf module disable nodejs -y &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
   PRINT Enable Nodejs 20 Version
   dnf module enable nodejs:20 -y &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -34,9 +44,9 @@ NODEJS() {
   #Install NodeJS
   dnf install nodejs -y &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -44,9 +54,9 @@ NODEJS() {
   #Setup SystemD Catalogue Service
   cp ${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -54,9 +64,9 @@ NODEJS() {
   #mongo client install
   cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -65,18 +75,18 @@ NODEJS() {
   #Add application User
   useradd roboshop &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
   PRINT Cleaning the old content
   rm -rf /app &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -84,9 +94,9 @@ NODEJS() {
   #Lets setup an app directory
   mkdir /app &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -95,24 +105,24 @@ NODEJS() {
   #Download the application code to created app directory
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
   cd /app &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
   PRINT extract App code content
   unzip /tmp/${component}.zip &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -120,20 +130,19 @@ NODEJS() {
   cd /app
   PRINT Downloading App dependencies
   npm install &>>$LOG_FILE
-  if [ $? -eq 0 ]; then
-    echo SUCCESS
-  else
-    echo FAILURE
-  fi
-
+   if [ $? -eq 0 ]; then
+     echo -e "\e[32mSUCCESS\e[0m"
+   else
+     echo -e "\e[31mFAILURE\e[0m"
+   fi
 
   PRINT loading the service
   #Load the service
   systemctl daemon-reload &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 
 
@@ -142,10 +151,9 @@ NODEJS() {
   systemctl enable ${component} &>>$LOG_FILE
   systemctl start ${component} &>>$LOG_FILE
   if [ $? -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
   fi
-
 
 }
