@@ -1,4 +1,5 @@
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
@@ -7,7 +8,7 @@ else
 fi
 
 #Install MongoDB
-dnf install mongodb-org -y
+dnf install mongodb-org -y &>>$LOG_FILE
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
@@ -36,7 +37,7 @@ else
 fi
 
 #Restart the service to make the changes effected.
-systemctl restart mongod
+systemctl restart mongod &>>$LOG_FILE
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
