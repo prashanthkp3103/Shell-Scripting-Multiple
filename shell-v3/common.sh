@@ -301,9 +301,21 @@ MAVEN() {
 PYTHON() {
   PRINT Copying the ${component} service file
   cp ${component}.service /etc/systemd/system/${component}.service  &>>$LOG_FILE
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+   exit 1
+  fi
 
   PRINT Installing python
   dnf install python3 gcc python3-devel -y  &>>$LOG_FILE
+  if [ $? -eq 0 ]; then
+     echo -e "\e[32mSUCCESS\e[0m"
+  else
+     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+     exit 1
+  fi
 
   PRINT Creating Roboshop user
   #checking user exist or no based on that creating
@@ -314,53 +326,53 @@ PYTHON() {
 
 
    PRINT Cleaning the old content
-      rm -rf /app &>>$LOG_FILE
-      if [ $? -eq 0 ]; then
-        echo -e "\e[32mSUCCESS\e[0m"
-      else
-        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-        exit 1
-      fi
+   rm -rf /app &>>$LOG_FILE
+   if [ $? -eq 0 ]; then
+     echo -e "\e[32mSUCCESS\e[0m"
+   else
+     echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+     exit 1
+   fi
 
 
-      PRINT Create App directory
-      #Lets setup an app directory
-      mkdir /app &>>$LOG_FILE
-      if [ $? -eq 0 ]; then
-        echo -e "\e[32mSUCCESS\e[0m"
-      else
-        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-        exit 1
-      fi
+    PRINT Create App directory
+    #Lets setup an app directory
+    mkdir /app &>>$LOG_FILE
+    if [ $? -eq 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+      exit 1
+    fi
 
-      PRINT Download App code
-        #Download the application code to created app directory
-      curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
-      if [ $? -eq 0 ]; then
-        echo -e "\e[32mSUCCESS\e[0m"
-      else
-        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-        exit 1
-      fi
+    PRINT Download App code
+    #Download the application code to created app directory
+    curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
+    if [ $? -eq 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+      exit 1
+    fi
 
-      cd /app &>>$LOG_FILE
-      if [ $? -eq 0 ]; then
-        echo -e "\e[32mSUCCESS\e[0m"
-      else
-        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-        exit 1
-      fi
+    cd /app &>>$LOG_FILE
+    if [ $? -eq 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+      exit 1
+    fi
 
-      PRINT extract App code content
-      unzip /tmp/${component}.zip &>>$LOG_FILE
-      if [ $? -eq 0 ]; then
-        echo -e "\e[32mSUCCESS\e[0m"
-      else
-        echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
-        exit 1
-      fi
+    PRINT extract App code content
+    unzip /tmp/${component}.zip &>>$LOG_FILE
+    if [ $? -eq 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+      exit 1
+    fi
 
-      #Lets download the dependencies
+    #Lets download the dependencies
             cd /app
             PRINT Downloading App dependencies
             pip3 install -r requirements.txt &>>$LOG_FILE
