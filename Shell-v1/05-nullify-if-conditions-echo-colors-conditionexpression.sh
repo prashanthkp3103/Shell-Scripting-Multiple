@@ -76,6 +76,15 @@ echo -e "\e[34mHello world in BLUE\e[0m"
 echo -e "\e[35mHello world in MAGENTA\e[0m"
 echo -e "\e[36mHello world in CYAN\e[0m"
 
+#next line
+echo -e "\e[36mHello\nworld in CYAN\e[0m"
+
+#2new line
+echo -e "\e[36mHello\n\nworld in CYAN\e[0m"
+
+#tab space
+echo -e "\e[36mHello\t\tworld in CYAN\e[0m"
+
 
 
 if it is failure it should not continue -meaning stop the script if any failure
