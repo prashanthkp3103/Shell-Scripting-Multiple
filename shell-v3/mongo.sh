@@ -1,3 +1,6 @@
+LOG_FILE=/tmp/roboshop.log
+rm -rf $LOG_FILE
+
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
 
 if [ $? -eq 0 ]; then
