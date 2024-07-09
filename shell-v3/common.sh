@@ -474,7 +474,7 @@ GO() {
 
       PRINT Download App code
         #Download the application code to created app directory
-      curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip &>>$LOG_FILE
+      curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$LOG_FILE
       if [ $? -eq 0 ]; then
         echo -e "\e[32mSUCCESS\e[0m"
       else
