@@ -324,6 +324,13 @@ PYTHON() {
     useradd roboshop &>>$LOG_FILE
   fi
 
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+    exit 1
+  fi
+
 
    PRINT Cleaning the old content
    rm -rf /app &>>$LOG_FILE
