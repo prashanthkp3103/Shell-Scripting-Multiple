@@ -420,14 +420,35 @@ GO() {
   PRINT Copying the ${component} service file
   cp ${component}.service /etc/systemd/system/${component}.service  &>>$LOG_FILE
 
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+    exit 1
+  fi
+
   PRINT Installing golang
   dnf install golang -y  &>>$LOG_FILE
+
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+    exit 1
+  fi
 
   PRINT Creating Roboshop user
   #checking user exist or no based on that creating
   id roboshop &>>$LOG_FILE
   if [ $? -ne 0 ]; then
     useradd roboshop &>>$LOG_FILE
+  fi
+
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE---Check log /tmp/roboshop.log\e[0m"
+    exit 1
   fi
 
 
