@@ -491,7 +491,7 @@ GO() {
       fi
 
       PRINT extract App code content
-      unzip /tmp/${component}.zip &>>$LOG_FILE
+      unzip /tmp/dispatch.zip &>>$LOG_FILE
       if [ $? -eq 0 ]; then
         echo -e "\e[32mSUCCESS\e[0m"
       else
