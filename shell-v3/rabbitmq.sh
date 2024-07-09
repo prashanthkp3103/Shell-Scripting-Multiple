@@ -4,6 +4,12 @@ LOG_FILE=/tmp/roboshop.log
 
 PRINT Coping the RabbitMQ Repo file
 cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo  &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE---exit 1ing\e[0m"
+  exit 1
+fi
 
 PRINT Installing Rabbitmq
 dnf install rabbitmq-server -y  &>>$LOG_FILE
