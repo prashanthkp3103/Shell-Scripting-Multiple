@@ -3,7 +3,7 @@ component=rabbimq
 LOG_FILE=/tmp/roboshop.log
 
 PRINT Coping the RabbitMQ Repo file
-cp rabbitmq.repo /etc/yum.repos.d/${rabbimq}.repo  &>>$LOG_FILE
+cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo  &>>$LOG_FILE
 
 PRINT Installing Rabbitmq
 dnf install rabbitmq-server -y  &>>$LOG_FILE
