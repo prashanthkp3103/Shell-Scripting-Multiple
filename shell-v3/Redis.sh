@@ -35,7 +35,7 @@ else
   echo -e "\e[31mFAILURE---exit 1ing\e[0m"
   exit 1
 fi
-sed -i '/protected-mode/ user.service protected-mode no' /etc/${component}/redis.conf &>>$LOG_FILE
+sed -i '/protected-mode/ cart.service protected-mode no' /etc/${component}/redis.conf &>>$LOG_FILE
 if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
